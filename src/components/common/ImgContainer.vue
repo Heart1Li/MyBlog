@@ -1,0 +1,32 @@
+<template>
+  <div class="img-container">
+   <slot></slot>
+  </div>
+</template>
+
+
+<style lang="scss" scoped>
+.img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 76%;
+  height: 400px;
+  // border: 1px solid pink;
+  border-radius: 1%;
+  margin: 0 auto;
+  margin-top: 64px;
+  background: url("../../assets/img/photo.png");
+  background-size: cover;
+  .print {
+  width: 50%;
+  height: 200px;
+  text-align: center;
+  line-height: 200px;
+  color: white;
+  font-size: 1.75rem;
+  margin: auto;
+}
+}
+
+</style>
