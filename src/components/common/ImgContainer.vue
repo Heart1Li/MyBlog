@@ -16,7 +16,7 @@
   border-radius: 1%;
   margin: 0 auto;
   margin-top: 64px;
-  background: url("../../assets/img/photo.png");
+  background: url("http://qgqbcw404.hn-bkt.clouddn.com/01.png");
   background-size: cover;
   .print {
   width: 50%;

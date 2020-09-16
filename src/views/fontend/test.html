@@ -1,85 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSS 3.0实现酷炫的按钮特效</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            font-family: '微软雅黑', sans-serif;
-            box-sizing: border-box;
-        }
- 
-        
- 
-        a {
-            position: relative;
-            padding: 10px 30px;
-            margin: 0 45px;
-            color: #21ebff;
-            text-decoration: none;
-            font-size: 20px;
-            text-transform: uppercase;
-            transition: 0.5s;
-            overflow: hidden;
-            -webkit-box-reflect: below 1px linear-gradient(transparent, #0003);
-        }
- 
-        a:hover {
-            background: #21ebff;
-            color: #111;
-            box-shadow: 0 0 50px #21ebff;
-            transition-delay: 0.5s;
-        }
- 
-        
- 
-        a::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 10px;
-            height: 10px;
-            border-top: 2px solid #21ebff;
-            border-left: 2px solid #21ebff;
-            transition: 0.5s;
-            transition-delay: 0.5s;
-        }
- 
-        a:hover::before {
-            width: 100%;
-            height: 100%;
-            transition-delay: 0s;
-        }
- 
-        a::after {
-            content: '';
-            position: absolute;
-            right: 0;
-            bottom: 0;
-            width: 10px;
-            height: 10px;
-            border-bottom: 2px solid #21ebff;
-            border-right: 2px solid #21ebff;
-            transition: 0.5s;
-            transition-delay: 0.5s;
-        }
- 
-        a:hover::after {
-            width: 100%;
-            height: 100%;
-            transition-delay: 0s;
-        }
-    </style>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
 </head>
- 
+
 <body>
-    <a href="#">Button</a>
-    <a href="#">Button</a>
-    <a href="#">Button</a>
+    <!-- 用构造函数写 -->
+    <input type="button" value="看看" id="btn">
+    <p id="p1">Hello how are you</p >
+
+    <script>
+        // 创建一个实例化对象
+        var change = new change('btn', 'p1');
+        // 构造函数传入实参形参
+        function change(b, p) {
+            this.btn = b;
+            this.p1 = p;
+            // 创建字体颜色  添加一个方法
+            this.creatColor = function () {
+                return '#' + Math.floor(Math.random() * 0xffffff).toString(16);
+            }
+            // 创建字体大小 添加一个方法
+            this.creatSize = function () {
+                return Math.floor(Math.random() * 40 + 12);
+            }
+            // call 方法继承
+            Son.call(this);
+
+            function Son() {
+                var btn = document.getElementById(this.btn);
+                var p1 = document.getElementById(this.p1);
+                // that变量接收的是this对象
+                var aaa = this;
+                btn.onclick = function () {
+                    p1.style.fontSize = aaa.creatSize() + 'px';
+                    //    p1.style.backgroundColor=aaa.creatColor();
+                    p1.style.color = aaa.creatColor();
+
+                }
+            }
+
+        }
+    </script>
 </body>
- 
+
 </html>

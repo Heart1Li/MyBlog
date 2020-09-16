@@ -10,6 +10,11 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 //导入阿里图标库
 import './assets/icon/iconfont.css'
+//导入mavonEditor
+import mavonEditor from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
+    // use
+Vue.use(mavonEditor)
 Vue.use(ElementUI);
 new Vue({
   router,

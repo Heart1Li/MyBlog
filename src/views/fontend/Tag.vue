@@ -1,7 +1,7 @@
 <template>
-  <div class="profile">
+  <div class="tag">
     <img-container>
-      <div class="print">关于我_</div>
+      <div class="print">标签页_</div>
     </img-container>
     <main></main>
   </div>
@@ -10,14 +10,17 @@
 <script>
 import ImgContainer from "../../components/common/ImgContainer";
 export default {
-  name: "Profile",
+  name: "Tag",
   components: {
     ImgContainer,
   },
+  created(){
+    // console.log(this.$route.params.id)
+  }
 };
 </script>
 <style lang="scss" scoped>
-.profile {
+.article {
   margin-top: 64px;
   height: 100%;
   main {

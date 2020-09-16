@@ -10,11 +10,11 @@
             <a href="#" class="nav-item">首页</a>
           </nav-bar-item>
 
-          <nav-bar-item path="/home/aechive">
+          <nav-bar-item path="/home/archive">
             <a href="#" class="nav-item">归档</a>
           </nav-bar-item>
 
-          <nav-bar-item path="/category">
+          <nav-bar-item path="/home/category">
             <a href="#" class="nav-item">分类</a>
           </nav-bar-item>
 

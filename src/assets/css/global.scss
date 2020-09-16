@@ -5,10 +5,11 @@ html,body{
   // box-sizing: border-box;
   
   #app {
+    height: 100%;
     position: relative;
     background-color:white;
     // background-color: pink;
     min-height:100%;
-    padding-top:1px;
+    // padding-top:1px;
   }
 }

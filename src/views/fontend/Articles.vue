@@ -17,7 +17,7 @@
             <main>
               <p>{{item.body}}</p>
               <div>
-                <a class="button-more">more</a>
+                <a class="button-more" @click="arcticleCilck(item.id)">more</a>
               </div>
             </main>
 
@@ -49,6 +49,9 @@
 <script>
 import ImgContainer from "../../components/common/ImgContainer";
 import Info from "../../components/content/profile/Info";
+
+//网络请求
+import getArticlesData from '../../network/article/getArticlesData'
 export default {
   name: "Articles",
   components: {
@@ -58,27 +61,7 @@ export default {
   data() {
     return {
       articles: [
-        {
-          id: "001",
-          title: "手写promise",
-          author: "li",
-          category: "手撕代码系列",
-          time: "2020-2-5",
-          body: "zasfajsfjaksfmalfmaksfmkamsfasfasf sfasf safasfasas",
-          star: 15,
-          isActive: true,
-        },
-        {
-          id: "002",
-          title: "JS基础",
-          author: "li",
-          category: "JavaScript",
-          time: "2020-3-9",
-          body:
-            "昨天（北京时间 2020年9月10日）华为鸿蒙OS 2.0正式发布，预计明年华为手机全面支持。同时公布了面向开发者的BATE版。看了一下文档，同时支持java和js。那必须整一个试试。昨天（北京时间 2020年9月10日）华为鸿蒙OS 2.0正式发布，预计明年华为手机全面支持。同时公布了面向开发者的BATE版。看了一下文档，同时支持java和js。那必须整一个试试。",
-          star: 10,
-          isActive: true,
-        },
+        
       ],
     };
   },
@@ -91,7 +74,18 @@ export default {
       item.isActive = !item.isActive;
       item.star--;
     },
+    //文章详情页按钮
+    arcticleCilck(id){
+      this.$router.push(`/home/article/${id}`)
+    }
   },
+  created(){
+    getArticlesData().then(res=>{
+      this.articles= res.data
+      this.articles.isActive =false
+      console.log(res)
+    })
+  }
 };
 </script>
 
