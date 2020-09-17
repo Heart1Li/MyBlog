@@ -17,7 +17,7 @@
             <main>
               <p>{{item.body}}</p>
               <div>
-                <a class="button-more" @click="arcticleCilck(item.id)">more</a>
+                <a class="button-more" @click="arcticleCilck(item._id)">more</a>
               </div>
             </main>
 

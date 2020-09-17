@@ -13,6 +13,7 @@ const Tag = ()=> import('../views/fontend/Tag')
 const Admin = ()=> import('../views/admin/Index')
 const AdminArticle = ()=> import('../views/admin/AdminArticle')
 const AddArticle = ()=> import('../views/admin/AddArticle')
+const AdminTags = ()=> import('../views/admin/AdminTags')
 
 Vue.use(VueRouter)
 
@@ -40,6 +41,7 @@ const routes = [
     children:[
       {path:'/admin/article',component:AdminArticle},
       {path:'/admin/article/add',component:AddArticle},
+      {path:'/admin/tags',component:AdminTags},
     ]
   }
   // {

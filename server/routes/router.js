@@ -8,19 +8,6 @@ let Tag = require('../models/tag');
 router.get('/api/article', async (req, res) => {
   // console.log(req)
   let article = await Article.find()
-  // Article.create([{
-  //   title: 'text',
-  //   author: '无限',
-  //   category: 'Test',
-  //   time: '2020-9-15',
-  //   body: 'this is a test',
-  //   star: 0,
-  // }],(err)=>{
-  //   if(!err){
-  //     console.log('插入成功')
-  //   }
-  // })
-  // console.log(article)
   res.send(article)
 })
 
@@ -34,10 +21,7 @@ router.get('/api/article/:type/category', async (req, res) => {
   res.send(article)
 })
 
-router.get('/api/category', async (req, res) => {
-  let tags = await Tag.find({})
-  res.send(tags)
-})
+
 
 router.post('/api/article/add', async (req, res) => {
   let articleData = ''
@@ -76,6 +60,47 @@ router.delete('/api/article/delete/:id', async (req,res)=>{
  }) 
 })
 
+router.get('/api/category', async (req, res) => {
+  let tags = await Tag.find({})
+  res.send(tags)
+})
 
+
+router.get('/api/category/:type', async (req, res) => {
+  console.log(req.params)
+  if(req.params.type === undefined) return
+  let tags = new Tag(req.params)
+  tags.save(err=>{
+    if(err){
+      console.log('添加标签失败')
+      res.send({status:400,msg:'添加标签失败'})
+    }
+    else{
+      console.log('添加标签成功')
+      res.send({status:200,msg:'添加标签成功'})
+    }
+  })
+})
+
+router.delete('/api/category/delete/:id', async (req,res)=>{
+  console.log(req.params)
+  if(req.params.id ===undefined) return
+  // console.log(id)
+  //删除该标签的所有文章
+
+
+  
+
+
+ Tag.deleteOne({_id:req.params.id}).then(result=>{
+  console.log(result)
+  if(result.ok==1){
+    res.send({status:200,msg:'删除成功'})
+  }
+  else{
+    res.send({status:400,msg:'删除失败'})
+  }
+ }) 
+})
 
 module.exports = router
