@@ -7,6 +7,7 @@ let Article = new Schema({
   "category":String,
   "time":String,
   "body":String,
+  "markdown":String,
   "star":Number,
 })
 

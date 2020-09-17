@@ -37,8 +37,8 @@ export default {
       return `#${r}${r}${r}`
     },
     //跳转到标签详情页
-    tagClick(type){
-      this.$router.push(`/home/category/${type}`)
+    tagClick(item){
+      this.$router.push(`/home/category/${item.type}`)
     }
   },
   created(){

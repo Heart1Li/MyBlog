@@ -6,16 +6,15 @@
     <div class="main">
       <div class="time-line-container">
         <p>共计{{articles.length}}篇文章</p>
-        <div class="time-point" v-for="time in timeline" :key="time.id">{{time}}
+        <div class="time-point" v-for="time in timeline" :key="time.id">
+          {{time}}
           <div v-for="item in articles" :key="item.id">
-            <div v-if="item.time.includes(time)" class="liner" @click="articleClick(item.id)">
+            <div v-if="item.time.includes(time)" class="liner" @click="articleClick(item._id)">
               <p>{{item.title}}</p>
               <p>{{item.time}}</p>
             </div>
-          
           </div>
         </div>
-        
       </div>
     </div>
   </div>
@@ -25,7 +24,7 @@
 import ImgContainer from "../../components/common/ImgContainer";
 
 //网络请求
-import getArticlesData from '../../network/article/getArticlesData'
+import getArticlesData from "../../network/article/getArticlesData";
 export default {
   name: "Archive",
   components: {
@@ -33,43 +32,40 @@ export default {
   },
   data() {
     return {
-      articles: [
-        
-      ],
+      articles: [],
       //
-      timeline:[],
+      timeline: [],
     };
   },
-  created(){
-    getArticlesData().then(res=>{
-      this.articles = res.data
-      this.computedTime()
-    })
-    
+  created() {
+    getArticlesData().then((res) => {
+      this.articles = res.data;
+      this.computedTime();
+    });
   },
-  methods:{
-    computedTime(){
+  methods: {
+    computedTime() {
       // let timeline
-      for(let i=0; i<this.articles.length; i++){
-        this.timeline.push(this.articles[i].time.substring(0,4))
+      for (let i = 0; i < this.articles.length; i++) {
+        this.timeline.push(this.articles[i].time.substring(0, 4));
       }
-      for(let i=0; i<this.timeline.length; i++){
-        for(let j=i+1; j<this.timeline.length; j++){
-          if(this.timeline[i]==this.timeline[j]){
-            this.timeline.splice(j,1)
-            j--
+      for (let i = 0; i < this.timeline.length; i++) {
+        for (let j = i + 1; j < this.timeline.length; j++) {
+          if (this.timeline[i] == this.timeline[j]) {
+            this.timeline.splice(j, 1);
+            j--;
           }
         }
       }
-      this.timeline.sort((a,b)=>{
-        return b-a
-      })
-      console.log(this.timeline)
+      this.timeline.sort((a, b) => {
+        return b - a;
+      });
+      console.log(this.timeline);
     },
-    articleClick(id){
-      this.$router.push(`/home/article/${id}`)
-    }
-  }
+    articleClick(id) {
+      this.$router.push(`/home/article/${id}`);
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
@@ -88,25 +84,23 @@ export default {
       margin: 0 18%;
       padding-top: 10%;
       padding-bottom: 10%;
-    .time-point {
-      font-size: 1.25em;
-      font-weight: 600;
-      padding-bottom: 25px;
-    }
-      
-    .liner{
-      font-size: 0.85em;
-      font-weight:500;
-      display: flex;
-      justify-content: space-between;
-      cursor: pointer;
-      p{
-        margin: 5px 0;
-        padding: 0 10px;
-        
+      .time-point {
+        font-size: 1.25em;
+        font-weight: 600;
+        padding-bottom: 25px;
       }
-    } 
-      
+
+      .liner {
+        font-size: 0.85em;
+        font-weight: 500;
+        display: flex;
+        justify-content: space-between;
+        cursor: pointer;
+        p {
+          margin: 5px 0;
+          padding: 0 10px;
+        }
+      }
     }
   }
 }

@@ -47,7 +47,7 @@ export default {
     watchScroll(){
       console.log('1')
       this.scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
-        //  当滚动超过 50 时，实现吸顶效果
+        //  当滚动超过 50 时，改变样式
         if (this.scrollTop > 49) {
           this.navBarFixed = true
         } else {

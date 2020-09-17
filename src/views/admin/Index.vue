@@ -93,6 +93,10 @@ export default {
       color: azure;
     }
   }
+  // .el-main{
+    // height: 690px;
+    // overflow: scroll;
+  // }
 
 }
 </style>

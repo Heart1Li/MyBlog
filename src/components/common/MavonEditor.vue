@@ -9,14 +9,16 @@ export default {
   nema:'MavonEditor',
   data(){
     return{
-      value:''
+      value:'',
+      render:''
     }
   },
   methods:{
     changeData(value, render){
-            // console.log(value);
-            // console.log(render);
-            this.$emit('saveBody',render)
+      this.value = value,
+      this.render = render
+            
+      this.$emit('saveBody',this.value,this.render)
             // this.contentHtml = render;
         }
   },

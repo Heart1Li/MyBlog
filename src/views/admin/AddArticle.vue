@@ -34,7 +34,7 @@
             <!-- <input type="date" v-model="articlForm.time"> -->
           </el-col>
         </el-form-item>
-        <mavon-editor @saveBody="saveBody"></mavon-editor>
+        <mavon-editor @saveBody="saveBody(arguments)"></mavon-editor>
         <el-form-item class="submit-button">
           <el-button type="primary" @click="submitForm(articlForm)">立即创建</el-button>
           <el-button @click="resetForm()">重置</el-button>
@@ -64,15 +64,18 @@ export default {
         category: "",
         time: "",
         body: "",
+        markdown:"",
         star: 0,
       },
     };
   },
   methods:{
-    saveBody(render){
-      // console.log('1')
-      // console.log(render)
-      this.articlForm.body = render
+    saveBody(body){
+      console.log(body[0])
+    
+      console.log(body[1])
+      this.articlForm.body = body[0]
+      this.articlForm.markdown = body[1]
     },
     //时间格式转换函数
     p(s) {

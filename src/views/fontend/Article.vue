@@ -1,11 +1,15 @@
 <template>
   <div class="article">
     <img-container>
-      <div class="print">{{articleFrom.title}}</div>
+      <div class="print">
+        <p>{{articleFrom.title}}</p>
+        <a v-if="articleFrom" class="iconfont icon-rili">{{articleFrom.time}}</a>
+        <a v-if="articleFrom" class="iconfont icon-biaoqian">{{articleFrom.category}}</a>
+      </div>
     </img-container>
     <main>
    <mavon-editor
-   v-model=" articleFrom.body"
+   v-model=" articleFrom.markdown"
    :subfield="false"
    :boxShadow="false"
    defaultOpen="preview"

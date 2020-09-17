@@ -5,6 +5,7 @@
     </img-container>
     <main class="main">
       <div class="left">
+        <div v-if="articles.length===0" class="context"></div>
         <div class="article-container" v-for="item in articles" :key="item.id">
           <div>
             <header>
@@ -22,7 +23,7 @@
             </main>
 
             <footer>
-              <a
+              <!-- <a
                 v-if="item.isActive == true"
                 class="iconfont icon-icon-test"
                 @click="buttonClick(item)"
@@ -32,7 +33,7 @@
                 class="iconfont icon-aixin"
                 @click="buttonClick_(item)"
                 style="color:deeppink"
-              >{{item.star}}</a>
+              >{{item.star}}</a> -->
             </footer>
           </div>
         </div>
@@ -60,20 +61,18 @@ export default {
   },
   data() {
     return {
-      articles: [
-        
-      ],
+      articles: [],
     };
   },
   methods: {
-    buttonClick(item) {
-      item.isActive = !item.isActive;
-      item.star++;
-    },
-    buttonClick_(item) {
-      item.isActive = !item.isActive;
-      item.star--;
-    },
+    // buttonClick(item) {
+    //   item.isActive = !item.isActive;
+    //   item.star++;
+    // },
+    // buttonClick_(item) {
+    //   item.isActive = !item.isActive;
+    //   item.star--;
+    // },
     //文章详情页按钮
     arcticleCilck(id){
       this.$router.push(`/home/article/${id}`)
@@ -104,7 +103,15 @@ export default {
     min-width: 500px;
     // background-color: white;
     margin-right: 5%;
-
+    .context {
+      width: 100%;
+      min-height: 250px;
+      background-color: white;
+      margin-bottom: 5px;
+      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16),
+        0 2px 10px 0 rgba(0, 0, 0, 0.12);
+      border-radius: 10px;
+    }
     .article-container {
       width: 100%;
       min-height: 250px;
@@ -135,6 +142,7 @@ export default {
         text-indent: 2em;
         padding: 1% 15% 0 18%;
         letter-spacing: 1px;
+        
         div{
           display: flex;
           justify-content: flex-end;

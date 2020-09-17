@@ -5,25 +5,27 @@ let Article = require('../models/article');
 let Tag = require('../models/tag');
 
 
-router.get('/api/article', async (req, res) => {
+router.get('/api/article', async (req, res) => {  //获取所有文章
   // console.log(req)
   let article = await Article.find()
   res.send(article)
 })
 
-router.get('/api/article/:id', async (req, res) => {
+router.get('/api/article/:id', async (req, res) => { //根据ID获取文章
   let articles = await Article.findById(req.params.id)
   res.send(articles)
 })
 
-router.get('/api/article/:type/category', async (req, res) => {
-  let article = await Article.find({ classfiy: req.params })
+router.get('/api/article/:type/category', async (req, res) => { //根据类别获取文章
+  console.log(req.params)
+  let article = await Article.find({ category: req.params.type })
+  console.log(article)
   res.send(article)
 })
 
 
 
-router.post('/api/article/add', async (req, res) => {
+router.post('/api/article/add', async (req, res) => {  //添加文章
   let articleData = ''
   req.on('data', function (data) {
     articleData += data
@@ -46,7 +48,7 @@ router.post('/api/article/add', async (req, res) => {
   })
 })
 
-router.delete('/api/article/delete/:id', async (req,res)=>{
+router.delete('/api/article/delete/:id', async (req,res)=>{  //删除文章
   console.log(req.params)
   // console.log(id)
  Article.deleteOne({_id:req.params.id}).then(result=>{
@@ -60,13 +62,13 @@ router.delete('/api/article/delete/:id', async (req,res)=>{
  }) 
 })
 
-router.get('/api/category', async (req, res) => {
+router.get('/api/category', async (req, res) => {  //查找所有分类
   let tags = await Tag.find({})
   res.send(tags)
 })
 
 
-router.get('/api/category/:type', async (req, res) => {
+router.get('/api/category/:type', async (req, res) => {   //添加分类
   console.log(req.params)
   if(req.params.type === undefined) return
   let tags = new Tag(req.params)
@@ -82,7 +84,7 @@ router.get('/api/category/:type', async (req, res) => {
   })
 })
 
-router.delete('/api/category/delete/:id', async (req,res)=>{
+router.delete('/api/category/delete/:id', async (req,res)=>{  //根据id删除分类
   console.log(req.params)
   if(req.params.id ===undefined) return
   // console.log(id)

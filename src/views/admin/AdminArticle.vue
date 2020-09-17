@@ -13,7 +13,7 @@
         <el-table-column prop="category" label="类别"></el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
-            <el-button type="primary" icon="el-icon-edit" circle></el-button>
+            <el-button type="primary" icon="el-icon-edit" circle @click="updateDialog(scope)"></el-button>
             <el-button type="danger" icon="el-icon-delete" circle @click="deleteDialog(scope)"></el-button>
           </template>
         </el-table-column>
@@ -65,6 +65,9 @@ export default {
          
         });
       });
+    },
+    updateDialog(){
+      
     },
     addArticle() {
       this.$router.push("/admin/article/add");

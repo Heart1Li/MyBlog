@@ -8,6 +8,7 @@
 <style lang="scss" scoped>
 .img-container {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   width: 76%;
@@ -19,14 +20,22 @@
   background: url("http://qgqbcw404.hn-bkt.clouddn.com/01.png");
   background-size: cover;
   .print {
-  width: 50%;
-  height: 200px;
+  width: 300px;
+  height: 100%px;
   text-align: center;
-  line-height: 200px;
+  // line-height: 200px;
   color: white;
-  font-size: 1.75rem;
+  font-size: 2rem;
   margin: auto;
-}
+  p{
+    margin-bottom: 5px;
+  }
+    a{
+      font-size: 1rem;
+      padding-right: 10px;
+    }
+  }
+  
 }
 
 </style>

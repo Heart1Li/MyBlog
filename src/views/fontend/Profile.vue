@@ -21,7 +21,7 @@ export default {
   margin-top: 64px;
   height: 100%;
   main {
-    min-height: 500px;
+    min-height: 300px;
     background-color: white;
     margin: 0 18%;
     margin-top: -50px;
