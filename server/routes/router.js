@@ -1,8 +1,69 @@
+// const { create } = require('core-js/fn/object');
 const express = require('express')
 let router = express.Router();
 require('./linkDB');
+require('./jwt');
 let Article = require('../models/article');
 let Tag = require('../models/tag');
+let User = require('../models/user')
+
+
+const fs = require('fs')
+const path = require('path')
+const jwt  = require('jsonwebtoken');
+
+
+function createToken(payload){
+  let secret = fs.readFileSync(path.join(__dirname, '../pem/rsa_private_key.pem'))
+  let token = jwt.sign({payload,exp:Math.floor(Date.now() / 1000)+(60*60*24)},secret,{algorithm: 'RS256'});
+  return token
+}
+function checkToken(token){
+  let publicKey = fs.readFileSync(path.join(__dirname, '../pem/rsa_public_key.pem'))
+  let payload = jwt.verify(token,publicKey,{algorithm: 'RS256'})
+}
+
+
+router.post('/api/login', async (req, res) => {  //获取所有文章
+  // console.log(req.body)
+  let userData=''
+  req.on('data', function (data) {
+    userData +=data
+    // console.log(userData)
+    
+  })
+  req.on("end", function () {
+    userDatas = JSON.parse(userData.toString())
+    // User.create({username:'admin',password:'li123456',email:'123456@qq.com'},function(err){
+    //   if(!err){
+    //     console.log('创建成功')
+    //   }
+    // })
+    User.findOne({username:userDatas.username},function(err,result){
+      if(!err){
+        console.log(result)
+        if(userDatas.password===result.password){
+          //创建token
+          let token = createToken({useranme:result.username,password:result.password},function(err){
+            if(err){
+              console.log(err)
+            }
+          })
+          console.log(token)
+          res.send({status:200,msd:'登录成功',token})
+        }
+        else{
+          res.send({status:401,msd:'密码错误'})
+        }
+      }
+      else{
+        res.send({status:401,msg:'用户名不存在'})
+      }
+    })
+    console.log(userDatas)
+  })
+  // console.log(userdata)
+})
 
 
 router.get('/api/article', async (req, res) => {  //获取所有文章
@@ -27,14 +88,16 @@ router.get('/api/article/:type/category', async (req, res) => { //根据类别�
 
 
 router.post('/api/article/add', async (req, res) => {  //添加文章
+  
   let articleData = ''
   req.on('data', function (data) {
     articleData += data
   });
   //接收完成后的操作
   req.on("end", function () {
+    console.log(req.headers.authorization)
     articleData = JSON.parse(articleData.toString())
-    console.log(articleData)
+    // console.log(articleData)
     // Article.create({})
     let newAarticle = new Article(articleData )
     newAarticle.save(function (err) {

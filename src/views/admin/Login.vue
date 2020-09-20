@@ -11,7 +11,7 @@
         </el-form-item>
           <el-form-item class="login_button">
           <el-button type="primary" @click="login">登录</el-button>
-          <el-button type="info" @click="resetFrom">重置</el-button>
+          <el-button type="info" >重置</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -21,17 +21,37 @@
 </template>
 
 <script>
+import Login from '../../network/login/login'
 export default {
   name: "Login",
   data() {
     return {
-     
       loginForm: {
         username: "",
         password: "",
       },
     };
   },
+  methods:{
+    login(){
+      Login(this.loginForm).then((res)=>{
+        if(res.data.status === 200){
+          this.$message({
+            message:'登录成功',
+            type:'success',
+          })
+          window.sessionStorage.setItem('loginToken',res.data.token)
+          this.$router.push('/admin')
+        }
+        else{
+          this.$message({
+            message:'登录失败',
+            type:'error',
+          })
+        }
+      })
+    }
+  }
 };
 </script>
 

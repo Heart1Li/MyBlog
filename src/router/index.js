@@ -66,11 +66,14 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to,from,next)=>{
-  let patt=/admin/
+  let patt=/\/home*/
   if(to.path==='/login') return next()
-  else if(patt.test(to.path)){ 
-      next('/login')    
-  }
-  next()
+  else if(patt.test(to.path)) return next()
+
+  const tokenStr = window.sessionStorage.getItem('loginToken')
+  if(!tokenStr) return next('/login')
+  next()   
+  // }
+  // next()
 })
 export default router

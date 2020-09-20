@@ -10,7 +10,11 @@ export function request(config) {
   //2.1请求拦截的作用
 
   instance.interceptors.request.use(config => {
+    //拦截器为每次请求添加上token
+    config.headers.Authorization = window.sessionStorage.getItem('loginToken')
+    console.log(config.headers)
     return config
+
   }, err => {
     console.log(err);
   })
