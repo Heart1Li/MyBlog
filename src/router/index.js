@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 
+
 const Home = ()=> import('../views/fontend/Home')
 const Articles = ()=> import('../views/fontend/Articles')
 const Article = ()=> import('../views/fontend/Article')
@@ -15,6 +16,7 @@ const AdminArticle = ()=> import('../views/admin/AdminArticle')
 const AddArticle = ()=> import('../views/admin/AddArticle')
 const AdminTags = ()=> import('../views/admin/AdminTags')
 const UpdateArticle = ()=> import('../views/admin/UpdateArticle')
+const Login = ()=> import('../views/admin/Login')
 
 Vue.use(VueRouter)
 
@@ -35,6 +37,10 @@ const routes = [
       {path: '/home/category', component: Category},
       {path: '/home/category/:type', component: Tag},  
     ]
+  },
+  {
+    path:'/login',
+    component:Login
   },
   {
     path:'/admin',
@@ -59,4 +65,12 @@ const router = new VueRouter({
   routes
 })
 
+router.beforeEach((to,from,next)=>{
+  let patt=/admin/
+  if(to.path==='/login') return next()
+  else if(patt.test(to.path)){ 
+      next('/login')    
+  }
+  next()
+})
 export default router
