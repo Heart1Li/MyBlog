@@ -66,8 +66,8 @@ export default {
         });
       });
     },
-    updateDialog(){
-      
+    updateDialog(scope){
+      this.$router.push(`/admin/article/update/${scope.row._id}`);
     },
     addArticle() {
       this.$router.push("/admin/article/add");

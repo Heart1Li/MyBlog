@@ -8,6 +8,7 @@ let Tag = require('../models/tag');
 router.get('/api/article', async (req, res) => {  //获取所有文章
   // console.log(req)
   let article = await Article.find()
+  console.log(article)
   res.send(article)
 })
 
@@ -62,6 +63,33 @@ router.delete('/api/article/delete/:id', async (req,res)=>{  //删除文章
  }) 
 })
 
+router.post('/api/article/update/:id', async (req,res)=>{  //更新文章
+  console.log(req.params)
+  let articleData = ''
+  req.on('data', function (data) {
+    articleData += data
+    Article.findByIdAndUpdate(req.params.id,JSON.parse(articleData),function(err){
+      if(err){
+        console.log('更新失败')
+        res.send({status:400,msg:'更新失败'})
+      }
+      else{
+        console.log('更新成功')
+        res.send({status:200,msg:'更新成功'})
+      }
+    })
+    
+  });
+  
+  //接收完成后的操作
+  
+
+  // console.log(id)
+//  Article.findByIdAndUpdate(req.params.id,)
+})
+
+
+
 router.get('/api/category', async (req, res) => {  //查找所有分类
   let tags = await Tag.find({})
   res.send(tags)
@@ -83,21 +111,57 @@ router.get('/api/category/:type', async (req, res) => {   //添加分类
     }
   })
 })
+//更新标签,并更新对应的文章标签
+router.post('/api/category/:id', async (req, res) => {   //添加分类
+  // console.log(req.params)
+  let tagData = ''
+  let updateTag = await Tag.findById(req.params.id)
+  // console.log(updateTag.type)
+  req.on('data', function (data) {
+    tagData += data
+    // console.log(JSON.parse(tagData))
+   
+    // console.log(req.params)
+    Tag.findByIdAndUpdate(req.params.id,JSON.parse(tagData),function(err){
+      if(err){
+        console.log('更新失败')
+        res.send({status:400,msg:'更新失败'})
+      }
+      else{
+        
+        Article.updateMany({category:updateTag.type,category:JSON.parse(tagData).type},function(err){
+          if(!err){
+             console.log('更新成功')
+             res.send({status:200,msg:'更新成功'})  
+          }  
+        }) 
+      }
+    }).then(()=>{
+        
+    })
+  })
+})
 
 router.delete('/api/category/delete/:id', async (req,res)=>{  //根据id删除分类
   console.log(req.params)
   if(req.params.id ===undefined) return
   // console.log(id)
   //删除该标签的所有文章
-
-
+  let deleteTag = await Tag.findById(req.params.id)
+  console.log(deleteTag.type)
+ 
   
 
 
  Tag.deleteOne({_id:req.params.id}).then(result=>{
   console.log(result)
   if(result.ok==1){
-    res.send({status:200,msg:'删除成功'})
+    
+    Article.deleteMany({category:deleteTag.type},function(err){
+      if(!err){
+        res.send({status:200,msg:'删除成功'})
+      }
+    })
   }
   else{
     res.send({status:400,msg:'删除失败'})

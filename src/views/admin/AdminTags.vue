@@ -11,7 +11,7 @@
         <el-table-column prop="type" label="标签"></el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
-            <el-button type="primary" icon="el-icon-edit" circle></el-button>
+            <el-button type="primary" icon="el-icon-edit" circle @click="updateTagData(scope.row)"></el-button>
             <el-button
               type="danger"
               icon="el-icon-delete"
@@ -30,6 +30,14 @@
         <el-button type="primary" @click="addNewtag">确 定</el-button>
       </span>
     </el-dialog>
+    <!-- 更新标签的对话框 -->
+    <el-dialog title="更新标签" :visible.sync="updateDialogVisible" width="30%">
+      <el-input v-model="updateTag.type"></el-input>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="updateDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="updateNewTag">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -37,6 +45,7 @@
 import getCategoryData from "../../network/category/getCategoryData";
 import addTag from "../../network/category/addTag";
 import deleteTag from "../../network/category/deleteTag";
+import updateTag from '../../network/category/updateTag'
 export default {
   name: "AdminTags",
   data() {
@@ -45,6 +54,8 @@ export default {
       tagsData: [],
       //控制添加标签对话框显示
       dialogVisible: false,
+      updateTag:'',
+      updateDialogVisible:false,
     };
   },
   methods: {
@@ -105,8 +116,32 @@ export default {
         });
       });
     },
+
+    updateTagData(data){
+      this.updateTag = data
+      this.updateDialogVisible =true
+      console.log(data)
+    },
+    updateNewTag(){
+      updateTag(this.updateTag._id,this.updateTag).then(res=>{
+        if(res.data.status == 200){
+          this.$message({
+            message:'更新成功',
+            type:'success'
+          })
+          this.getTags();
+        }
+        else{
+          this.$message({
+          message: '更新文章失败',
+          type: 'warning'
+           })
+        }
+      })
+      this.updateDialogVisible =false
+    }
   },
-  created() {
+  created(){
     this.getTags();
   },
 };

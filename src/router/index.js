@@ -14,6 +14,7 @@ const Admin = ()=> import('../views/admin/Index')
 const AdminArticle = ()=> import('../views/admin/AdminArticle')
 const AddArticle = ()=> import('../views/admin/AddArticle')
 const AdminTags = ()=> import('../views/admin/AdminTags')
+const UpdateArticle = ()=> import('../views/admin/UpdateArticle')
 
 Vue.use(VueRouter)
 
@@ -42,6 +43,7 @@ const routes = [
       {path:'/admin/article',component:AdminArticle},
       {path:'/admin/article/add',component:AddArticle},
       {path:'/admin/tags',component:AdminTags},
+      {path:'/admin/article/update/:id',component:UpdateArticle},
     ]
   }
   // {
