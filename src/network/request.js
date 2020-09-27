@@ -11,7 +11,7 @@ export function request(config) {
 
   instance.interceptors.request.use(config => {
     //拦截器为每次请求添加上token
-    config.headers.Authorization = window.sessionStorage.getItem('loginToken')
+    config.headers.authorization = window.sessionStorage.getItem('loginToken')
     console.log(config.headers)
     return config
 
