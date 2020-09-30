@@ -23,16 +23,20 @@
   width: 300px;
   height: 100%px;
   text-align: center;
-  // line-height: 200px;
   color: white;
-  font-size: 2rem;
+  font-size: 2.2rem;
   margin: auto;
   p{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     margin-bottom: 5px;
+    letter-spacing: 1px;
   }
     a{
-      font-size: 1rem;
+      font-size: 0.9rem;
       padding-right: 10px;
+      &::before{
+        margin-right: 3px;
+      }
     }
   }
   

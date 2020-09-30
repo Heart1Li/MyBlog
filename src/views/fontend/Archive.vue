@@ -84,9 +84,14 @@ export default {
       margin: 0 18%;
       padding-top: 10%;
       padding-bottom: 10%;
+      p {
+        letter-spacing: 1px;
+        // font-size: 600;
+      }
       .time-point {
-        font-size: 1.25em;
+        font-size: 2em;
         font-weight: 600;
+        font-family: Times, 'Times New Roman', serif;
         padding-bottom: 25px;
       }
 

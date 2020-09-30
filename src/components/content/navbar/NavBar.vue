@@ -21,9 +21,9 @@
           <nav-bar-item path="/home/proflie">
             <a href="#" class="nav-item">关于我</a>
           </nav-bar-item>
-          <!-- <nav-bar-item>
-            <a href="#" class="nav-item">搜索</a>
-          </nav-bar-item>-->
+          <nav-bar-item path="/login">
+            <a href="#" class="nav-item">登录</a>
+          </nav-bar-item>
         </ul>
       </div>
     </div>

@@ -16,25 +16,11 @@
               </div>
             </header>
             <main>
-              <p>{{item.body}}</p>
+              <p v-html="item.markdown"></p>
               <div>
                 <a class="button-more" @click="arcticleCilck(item._id)">more</a>
               </div>
             </main>
-
-            <footer>
-              <!-- <a
-                v-if="item.isActive == true"
-                class="iconfont icon-icon-test"
-                @click="buttonClick(item)"
-              >{{item.star}}</a>
-              <a
-                v-else
-                class="iconfont icon-aixin"
-                @click="buttonClick_(item)"
-                style="color:deeppink"
-              >{{item.star}}</a> -->
-            </footer>
           </div>
         </div>
       </div>
@@ -65,14 +51,6 @@ export default {
     };
   },
   methods: {
-    // buttonClick(item) {
-    //   item.isActive = !item.isActive;
-    //   item.star++;
-    // },
-    // buttonClick_(item) {
-    //   item.isActive = !item.isActive;
-    //   item.star--;
-    // },
     //文章详情页按钮
     arcticleCilck(id){
       this.$router.push(`/home/article/${id}`)
@@ -122,8 +100,10 @@ export default {
       border-radius: 10px;
       header {
         h2 {
-          font-size: 1.45em;
-          font-weight: 600;
+          font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+          letter-spacing: 1px;
+          font-size: 1.85em;
+          font-weight: 550;
           margin: 0;
           padding: 5% 0 0 18%;
         }
@@ -135,11 +115,16 @@ export default {
             text-decoration: none;
             font-size: 0.85em;
             padding-right: 20px;
+            margin-left: 2px;
+            &::before{
+              margin-right: 3px;
+            }
           }
+          
         }
       }
       main {
-        text-indent: 2em;
+        // text-indent: 2em;
         padding: 1% 15% 0 18%;
         letter-spacing: 1px;
         
@@ -157,7 +142,7 @@ export default {
           width: 100px;
           position: relative;
           padding: 10px 15px;
-          margin: 0;
+          margin-bottom: 20px;
           color:#111;
           text-decoration: none;
           font-size: 1em;

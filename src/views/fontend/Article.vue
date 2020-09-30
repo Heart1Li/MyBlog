@@ -8,12 +8,7 @@
       </div>
     </img-container>
     <main>
-   <mavon-editor
-   v-model=" articleFrom.markdown"
-   :subfield="false"
-   :boxShadow="false"
-   defaultOpen="preview"
-   :toolbarsFlag="false"/> 
+      <p v-html="articleFrom.markdown"></p>
     </main>
   </div>
 </template>
@@ -54,6 +49,12 @@ export default {
     border-radius: 5px;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16),
       0 2px 10px 0 rgba(0, 0, 0, 0.12);
+
+      p{
+        margin-left: 10%;
+        padding-top: 5%;
+        text-indent: 2em;
+      }
   }
 }
 </style>
